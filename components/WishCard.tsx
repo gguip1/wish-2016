@@ -16,8 +16,8 @@ interface WishCardProps {
 }
 
 function getRelativeTime(dateString: string): string {
-  // DB에서 한국 시간으로 저장되므로 그대로 파싱
-  const date = new Date(dateString.replace(' ', 'T') + '+09:00');
+  // DB에서 로컬 시간으로 저장됨 (타임존 없이 파싱)
+  const date = new Date(dateString.replace(' ', 'T'));
   const now = new Date();
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
