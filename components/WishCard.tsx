@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface Wish {
@@ -39,6 +39,11 @@ export default function WishCard({ wish, index }: WishCardProps) {
   const [likes, setLikes] = useState(wish.likes || 0);
   const [isLiking, setIsLiking] = useState(false);
   const [justLiked, setJustLiked] = useState(false);
+
+  // props가 변경되면 likes 업데이트 (폴링 반영)
+  useEffect(() => {
+    setLikes(wish.likes || 0);
+  }, [wish.likes]);
 
   const handleLike = async () => {
     if (isLiking) return;
